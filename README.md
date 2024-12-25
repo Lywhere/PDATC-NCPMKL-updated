@@ -200,6 +200,9 @@ atc_global_kernel = atc_matrix_combination([ATC_fingerprint_kernel])
 ## The models of single fingerprint kernel
 ```python
 WK = WKNKN(drug_global_kernel, atc_global_kernel, train_data.values, self.omega)
+     F_train_inference = WK.get_scores()
+nsp = NSP(drug_global_kernel, atc_global_kernel, F_train_inference)
+     predict = nsp.network_NSP()
 ```
 ```python
 WK = WKNKN(drug_fingerprint_kernel, ATC_fingerprint_kernel, train_data.values, self.omega)
