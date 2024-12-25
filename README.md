@@ -177,6 +177,9 @@ After running our model, the **NAME_predict.csv** file and **NAME_actual.csv** f
 
 # Additional experiment
 There were six ATC code kernels in this model. It was necessary to analyze their importance for the model. In view of this, each ATC code kernel was removed one by one, producing six models. These models were still evaluated by ten-fold cross-validation. 
+```python
+atc_global_kernel = atc_matrix_combination([ATC_atc_columns_kernel, ATC_atc_probabilistic_kernel, ATC_atc_SM_kernel, ATC_target_protein_kernel, ATC_side_effects_kernel, ATC_fingerprint_kernel])
+```
 ## The models by removing one ATC code kernel
 ```python
 atc_global_kernel = atc_matrix_combination([ATC_atc_probabilistic_kernel, ATC_atc_SM_kernel, ATC_target_protein_kernel, ATC_side_effects_kernel, ATC_fingerprint_kernel])
