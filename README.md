@@ -206,6 +206,9 @@ nsp = NSP(drug_global_kernel, atc_global_kernel, F_train_inference)
 ```
 ```python
 WK = WKNKN(drug_fingerprint_kernel, ATC_fingerprint_kernel, train_data.values, self.omega)
+     F_train_inference = WK.get_scores()
+nsp = NSP(drug_fingerprint_kernel, ATC_fingerprint_kernel, F_train_inference)
+     predict = nsp.network_NSP()
 ```
 # Result
 The PR curves and ROC curves predicted by our model on the dataset are shown below:
