@@ -174,7 +174,34 @@ if __name__ == "__main__":
     
 ### The results predicted by the model
 After running our model, the **NAME_predict.csv** file and **NAME_actual.csv** file will be generated, where the **NAME_predict.csv** file will store the **predicted score**, the **actual value** is saved in the **NAME_actual.csv** file.
-## Result
+
+# Additional experiment
+There were six ATC code kernels in this model. It was necessary to analyze their importance for the model. In view of this, each ATC code kernel was removed one by one, producing six models. These models were still evaluated by ten-fold cross-validation. 
+## The models by removing one ATC code kernel
+```python
+atc_global_kernel = atc_matrix_combination([ATC_atc_probabilistic_kernel, ATC_atc_SM_kernel, ATC_target_protein_kernel, ATC_side_effects_kernel, ATC_fingerprint_kernel])
+atc_global_kernel = atc_matrix_combination([ATC_atc_columns_kernel ATC_atc_SM_kernel, ATC_target_protein_kernel, ATC_side_effects_kernel, ATC_fingerprint_kernel])
+atc_global_kernel = atc_matrix_combination([ATC_atc_columns_kernel, ATC_atc_probabilistic_kernelATC_target_protein_kernel, ATC_side_effects_kernel, ATC_fingerprint_kernel])
+atc_global_kernel = atc_matrix_combination([ATC_atc_columns_kernel, ATC_atc_probabilistic_kernel, ATC_atc_SM_kernelATC_side_effects_kernel, ATC_fingerprint_kernel])
+atc_global_kernel = atc_matrix_combination([ATC_atc_columns_kernel, ATC_atc_probabilistic_kernel, ATC_atc_SM_kernel, ATC_target_protein_kernel, ATC_fingerprint_kernel])
+atc_global_kernel = atc_matrix_combination([ATC_atc_columns_kernel, ATC_atc_probabilistic_kernel, ATC_atc_SM_kernel, ATC_target_protein_kernel, ATC_side_effects_kernel])
+```
+## The models of single ATC code kernel
+```python
+atc_global_kernel = atc_matrix_combination([ATC_atc_columns_kernel])
+atc_global_kernel = atc_matrix_combination([ATC_atc_probabilistic_kernel])
+atc_global_kernel = atc_matrix_combination([ATC_atc_SM_kernel])
+atc_global_kernel = atc_matrix_combination([ATC_target_protein_kernel])
+atc_global_kernel = atc_matrix_combination([ATC_fingerprint_kernel])
+```
+## The models of single fingerprint kernel
+```python
+WK = WKNKN(drug_global_kernel, atc_global_kernel, train_data.values, self.omega)
+```
+```python
+WK = WKNKN(drug_fingerprint_kernel, ATC_fingerprint_kernel, train_data.values, self.omega)
+```
+# Result
 The PR curves and ROC curves predicted by our model on the dataset are shown below:
 1. The PR curves 
 2. The ROC curves
